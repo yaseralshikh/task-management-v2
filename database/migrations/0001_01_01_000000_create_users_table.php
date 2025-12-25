@@ -15,10 +15,22 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('national_id', 10)->unique(); // رقم الهوية الوطنية
+            $table->string('phone', 20)->nullable();
+            $table->string('job_title')->nullable();
+            $table->string('avatar')->nullable();
+            $table->enum('theme', ['light', 'dark', 'auto'])->default('auto');
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('is_owner')->default(false); // مالك النظام
+            $table->boolean('is_active')->default(false);
             $table->string('password');
             $table->rememberToken();
+            $table->timestamp('last_login_at')->nullable();
             $table->timestamps();
+
+            $table->index('email');
+            $table->index('national_id');
+            $table->index('is_active');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
