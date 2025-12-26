@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             
-            $table->index(['attachable_type', 'attachable_id']);
+            // $table->index(['attachable_type', 'attachable_id']);
             $table->index('user_id');
         });
     }

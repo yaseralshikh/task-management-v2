@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
             
-            $table->index(['invitable_type', 'invitable_id']);
+            // $table->index(['invitable_type', 'invitable_id']);
             $table->index(['invitee_email', 'status']);
             $table->index('token');
         });

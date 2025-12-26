@@ -2,15 +2,17 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
+    protected $model = User::class;
     /**
      * The current password being used by the factory.
      */
@@ -26,14 +28,42 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'national_id' => fake()->unique()->numerify('##########'),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
+            'avatar' => fake()->imageUrl(200, 200, 'people'),
+            'phone' => fake()->phoneNumber(),
+            'job_title' => fake()->jobTitle(),
+            'bio' => fake()->paragraph(),
+            'timezone' => 'Asia/Riyadh',
+            'language' => 'ar',
+            'date_format' => 'Y-m-d',
+            'time_format' => 'H:i',
+            'week_starts_on' => 6,
+            'theme' => fake()->randomElement(['light', 'dark', 'auto']),
+            'is_owner' => false,
+            'is_active' => true,
+            'last_login_at' => fake()->dateTimeBetween('-30 days', 'now'),
             'remember_token' => Str::random(10),
             'two_factor_secret' => Str::random(10),
             'two_factor_recovery_codes' => Str::random(10),
             'two_factor_confirmed_at' => now(),
         ];
     }
+
+    public function owner(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_owner' => true,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_active' => false,
+        ]);
+    }    
 
     /**
      * Indicate that the model's email address should be unverified.
