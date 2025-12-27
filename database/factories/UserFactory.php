@@ -35,8 +35,6 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'job_title' => fake()->jobTitle(),
             'bio' => fake()->paragraph(),
-            'timezone' => 'Asia/Riyadh',
-            'language' => 'ar',
             'date_format' => 'Y-m-d',
             'time_format' => 'H:i',
             'week_starts_on' => 6,

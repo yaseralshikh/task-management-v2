@@ -13,15 +13,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            UsersSeeder::class,
+            TagsSeeder::class,
+            TeamsSeeder::class,
+            ProjectsSeeder::class,
+            TasksSeeder::class,
+            CommentsAndAttachmentsSeeder::class,
+        ]);
         // User::factory(10)->create();
 
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => 'password',
-                'email_verified_at' => now(),
-            ]
-        );
+        // User::firstOrCreate(
+        //     ['email' => 'test@example.com'],
+        //     [
+        //         'name' => 'Test User',
+        //         'password' => 'password',
+        //         'email_verified_at' => now(),
+        //     ]
+        // );
     }
 }

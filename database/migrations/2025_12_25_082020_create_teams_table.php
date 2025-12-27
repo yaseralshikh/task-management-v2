@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('color', 7)->default('#3B82F6');
             $table->boolean('is_active')->default(true);
+            $table->integer('max_members')->nullable();
             $table->json('settings')->nullable();
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

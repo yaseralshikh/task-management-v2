@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('national_id', 10)->unique(); // رقم الهوية الوطنية
             $table->string('phone', 20)->nullable();
             $table->string('job_title')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('timezone', 50)->default('Asia/Riyadh');
+            $table->string('language', 5)->default('ar');
+            $table->string('date_format', 20)->default('Y-m-d');
+            $table->string('time_format', 20)->default('H:i');
+            $table->tinyInteger('week_starts_on')->default(6); // السبت            
             $table->string('avatar')->nullable();
             $table->enum('theme', ['light', 'dark', 'auto'])->default('auto');
             $table->timestamp('email_verified_at')->nullable();
